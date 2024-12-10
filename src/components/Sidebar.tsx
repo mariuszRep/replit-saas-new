@@ -51,7 +51,8 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
         </button>
         <button
           onClick={onToggle}
-          className="flex items-center justify-center w-full py-2 text-gray-600 hover:bg-gray-100 transition-colors"
+          className={`flex items-center px-3 py-2 w-full text-gray-600 hover:bg-gray-100 transition-colors
+            ${isOpen ? 'justify-start' : 'justify-end'}`}
         >
           {isOpen ? (
             <ChevronLeft className="w-5 h-5" />
