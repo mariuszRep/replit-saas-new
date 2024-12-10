@@ -42,8 +42,8 @@ function AppContent() {
     <div className="min-h-screen bg-gray-50">
       {user && <Navbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />}
       <div className="flex">
-        {user && <Sidebar isOpen={sidebarOpen} />}
-        <main className={`flex-1 transition-all duration-300 ${user ? (sidebarOpen ? 'ml-64' : 'ml-20') : ''}`}>
+        {user && <Sidebar isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />}
+        <main className={`flex-1 transition-all duration-300 ${user ? (sidebarOpen ? 'ml-64' : 'ml-12') : ''}`}>
           {content}
         </main>
       </div>

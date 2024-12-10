@@ -1,10 +1,11 @@
-import { LayoutDashboard, BarChart, Users, Settings, FileText } from 'lucide-react';
+import { LayoutDashboard, BarChart, Users, Settings, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface SidebarProps {
   isOpen: boolean;
+  onToggle: () => void;
 }
 
-export default function Sidebar({ isOpen }: SidebarProps) {
+export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
   const menuItems = [
     { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
     { icon: BarChart, label: 'Analytics', path: '/analytics' },
@@ -26,12 +27,11 @@ export default function Sidebar({ isOpen }: SidebarProps) {
               ${window.location.pathname === item.path ? 'bg-gray-100' : ''}`}
           >
             <item.icon className="w-5 h-5 min-w-[20px] text-gray-600" />
-            <span 
-              className={`text-sm font-medium whitespace-nowrap transition-all duration-300
-                ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 hidden'}`}
-            >
-              {item.label}
-            </span>
+            {isOpen && (
+              <span className="text-sm font-medium whitespace-nowrap transition-all duration-300">
+                {item.label}
+              </span>
+            )}
           </button>
         ))}
       </div>
@@ -43,12 +43,21 @@ export default function Sidebar({ isOpen }: SidebarProps) {
             ${window.location.pathname === '/settings' ? 'bg-gray-100' : ''}`}
         >
           <Settings className="w-5 h-5 min-w-[20px] text-gray-600" />
-          <span 
-            className={`text-sm font-medium whitespace-nowrap transition-all duration-300
-              ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 hidden'}`}
-          >
-            Settings
-          </span>
+          {isOpen && (
+            <span className="text-sm font-medium whitespace-nowrap transition-all duration-300">
+              Settings
+            </span>
+          )}
+        </button>
+        <button
+          onClick={onToggle}
+          className="flex items-center justify-center w-full py-2 text-gray-600 hover:bg-gray-100 transition-colors"
+        >
+          {isOpen ? (
+            <ChevronLeft className="w-5 h-5" />
+          ) : (
+            <ChevronRight className="w-5 h-5" />
+          )}
         </button>
       </div>
     </aside>
