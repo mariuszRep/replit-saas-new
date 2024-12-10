@@ -28,22 +28,19 @@ function AppContent() {
   }
 
   let content;
-  if (!user && currentPath !== '/login') {
-    window.history.pushState(null, '', '/login');
+  if (!user) {
     content = <Login />;
   } else if (currentPath === '/dashboard') {
     content = <Dashboard />;
   } else if (currentPath === '/profile') {
     content = <Profile />;
-  } else if (currentPath === '/login' && !user) {
-    content = <Login />;
   } else {
     content = <Dashboard />;
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
+      {user && <Navbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />}
       <div className="flex">
         {user && <Sidebar isOpen={sidebarOpen} />}
         <main className={`flex-1 transition-all duration-300 ${user ? (sidebarOpen ? 'ml-64' : 'ml-20') : ''}`}>
